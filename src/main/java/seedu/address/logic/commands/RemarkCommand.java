@@ -58,7 +58,8 @@ public class RemarkCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether the remark is added to or removed from
+     * Generates a command execution success message based on whether 
+     * the remark is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
@@ -71,7 +72,7 @@ public class RemarkCommand extends Command {
         if (other == this) {
             return true;
         }
-
+        
         // instanceof handles nulls
         if (!(other instanceof RemarkCommand)) {
             return false;
