@@ -15,10 +15,12 @@ import org.testfx.util.WaitForAsyncUtils;
 import javafx.scene.input.KeyCode;
 import seedu.address.Main;
 import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 
 class MainUiTest extends ApplicationTest {
 
     private MainApp app;
+    private Logger logger = LogsCenter.getLogger(Main.class);
 
     @Test
     void main_giveWarning_success() {
@@ -41,20 +43,27 @@ class MainUiTest extends ApplicationTest {
 
     @Test
     void main_opensApplication_success() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+
         try {
             Main.main(new String[]{});
         } catch (IllegalStateException e) {
-            FxToolkit.registerPrimaryStage();
-            app = new MainApp();
-            FxToolkit.setupApplication(() -> app);
-            FxToolkit.showStage();
-            WaitForAsyncUtils.waitForFxEvents(20);
-            FxRobot robot = new FxRobot();
-            assertTrue(robot.lookup("#menuBar").tryQuery().isPresent(),
-                    "Main method opens application successfully");
-            clickOn("#commandBoxPlaceholder");
-            write("exit");
-            push(KeyCode.ENTER);
+            logger.warning("Caught IllegalStateException: " + e.getMessage());
         }
+
+        app = new MainApp();
+        FxToolkit.setupApplication(() -> app);
+
+        FxToolkit.showStage();
+
+        WaitForAsyncUtils.waitForFxEvents(20);
+
+        FxRobot robot = new FxRobot();
+        assertTrue(robot.lookup("#menuBar").tryQuery().isPresent(),
+                "Main method opens application successfully");
+
+        clickOn("#commandBoxPlaceholder");
+        write("exit");
+        push(KeyCode.ENTER);
     }
 }
