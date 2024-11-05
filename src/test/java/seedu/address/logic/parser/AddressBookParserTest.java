@@ -20,6 +20,7 @@ import seedu.address.logic.commands.AddBuyerProfile;
 import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.ChatWindowCommand;
+import seedu.address.logic.commands.ClearClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
@@ -66,6 +67,11 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_clearclients() throws Exception {
+        assertTrue(parser.parseCommand("clearclients") instanceof ClearClientCommand);
     }
 
     @Test
